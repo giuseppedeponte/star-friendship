@@ -1,0 +1,26 @@
+{
+  "name": "star-friendship",
+  "description": "Multiplayer typing game project",
+  "repository": "https://github.com/giuseppedeponte/star-friendship",
+  "version": "0.0.0",
+  "licence": "GPL-3.0",
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-session": "^1.15.5",
+    "mongodb": "^2.2.31",
+    "morgan": "~1.8.1",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "~2.4.2",
+    "websocket": "^1.0.24"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.5.3"
+  }
+}

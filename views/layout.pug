@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/lib/gutenberg/gutenberg.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    main
+      include includes/header.pug
+      include includes/nav.pug
+      hr
+      block content      
+      include includes/footer.pug
