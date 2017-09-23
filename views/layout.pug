@@ -4,10 +4,11 @@ html
     title= title
     link(rel='stylesheet', href='/lib/gutenberg/gutenberg.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="https://use.fontawesome.com/82f7a8fa5f.js")
   body
     main
       include includes/header.pug
-      include includes/nav.pug
       hr
+      include includes/nav.pug
       block content      
       include includes/footer.pug

@@ -2,5 +2,26 @@ body {
   background-color: #fefefe;
 }
 * {
+  box-sizing: border-box;
+}
+#nav {
+    text-align: center;
+    display: flex;
+}
+a:visited {
   color: #222;
+}
+a:active,
+a:visited:active {
+  color: indianred;
+}
+a:hover,
+a:focus,
+a:visited:hover,
+a:visited:focus {
+  color: tomato;
+  outline: none;
+}
+#nav a {
+  text-decoration: none;
 }
