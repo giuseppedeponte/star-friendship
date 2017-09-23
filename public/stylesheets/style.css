@@ -1,12 +1,10 @@
+/* GENERIC STYLES */
 body {
+  width: 100%;
   background-color: #fefefe;
 }
 * {
   box-sizing: border-box;
-}
-#nav {
-    text-align: center;
-    display: flex;
 }
 a:visited {
   color: #222;
@@ -22,6 +20,41 @@ a:visited:focus {
   color: tomato;
   outline: none;
 }
+/* NAVIGATION */
+#nav {
+  text-align: center;
+  transition: position .5s ease-in-out;
+}
 #nav a {
+  display: inline-block;
   text-decoration: none;
+}
+#nav .brand {
+  display: none;
+}
+#nav.top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fefefe;
+  max-width: none;
+  margin: 0;
+  height: 3.5rem;
+}
+#nav.top .brand {
+  display: inline-block;
+}
+#nav.top strong,
+#nav.top a {
+  height: 100%;
+  line-height: 3.5rem;
+  text-align: center;
+  padding: 0 0.47rem;
+}
+#nav.top a:hover,
+#nav.top a:focus {
+  /*background-color: #222;*/
+  color: tomato;
+  border-bottom: 5px solid tomato;
 }
