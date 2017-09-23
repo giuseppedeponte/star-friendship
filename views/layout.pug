@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/lib/meyerweb/reset.css')
     link(rel='stylesheet', href='/lib/gutenberg/gutenberg.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="https://use.fontawesome.com/82f7a8fa5f.js")
@@ -11,4 +12,5 @@ html
       include includes/nav.pug
       hr
       block content
-      include includes/footer.pug
+      hr
+      //- include includes/footer.pug

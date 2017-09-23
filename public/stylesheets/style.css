@@ -1,4 +1,8 @@
 /* GENERIC STYLES */
+html {
+  font-size: 20px;
+  font-size: 125%;
+}
 body {
   width: 100%;
   background-color: #fefefe;
@@ -20,10 +24,79 @@ a:visited:focus {
   color: tomato;
   outline: none;
 }
+footer {
+  position: fixed;
+  bottom: 1rem;
+  background-color: #fefefe;
+}
+input,
+textarea,
+select,
+button[type='submit'] {
+  border: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  margin: inherit;
+  padding: inherit;
+  line-height: inherit;
+}
+input:not([type='submit']) {
+  border-bottom: 1px solid #aaa;
+}
+input:not([type='submit']):focus {
+  border-bottom: 5px solid tomato;
+}
+#username hr {
+  visibility: hidden;
+}
+#uform #uname + label {
+  display: inline-block;
+  width: 100%;
+  color: #757575;
+  top: -37px;
+  transition: all ease-in 100ms;
+  position: relative;
+}
+#uform #uname:valid + label,
+#uform #uname:focus + label {
+  color: #222;
+  transform: scale(0.8);
+  transform-origin: center left;
+  top: -69px;
+  transition: all ease-in 100ms;
+}
+#uform #uname {
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+}
+#uform input[type="submit"] {
+  display: inline-block;
+  width: 50%;
+  margin-left: 25%;
+  height: 38px;
+  background-color: #222;
+  color: #fefefe;
+  border-radius: 20px;
+}
+#uform #uname:valid ~ input[type="submit"],
+#uform #uname:valid ~ input[type="submit"]:focus:active,
+#uform #uname:valid ~ input[type="submit"]:hover:active {
+  background-color: tomato;
+}
+#uform #uname:valid ~ input[type="submit"]:focus,
+#uform #uname:valid ~ input[type="submit"]:hover {
+  background-color: rgba(255,99,71,0.75);
+}
+
 /* NAVIGATION */
 #nav {
   text-align: center;
   transition: position .5s ease-in-out;
+  margin-bottom: 0;
 }
 #nav a {
   display: inline-block;
@@ -54,7 +127,6 @@ a:visited:focus {
 }
 #nav.top a:hover,
 #nav.top a:focus {
-  /*background-color: #222;*/
   color: tomato;
   border-bottom: 5px solid tomato;
 }

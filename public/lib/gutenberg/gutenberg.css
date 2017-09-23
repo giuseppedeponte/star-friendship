@@ -76,7 +76,7 @@ License URL ... https://raw.githubusercontent.com/matejlatin/Gutenberg/master/li
 }
 
 .btnToggleGrid {
-  background: url("../../assets/images/grid-icons.png") top right no-repeat;
+  /*background: url("../../assets/images/grid-icons.png") top right no-repeat;*/
   background-size: 32px;
   display: block;
   font-size: 14px;
@@ -501,10 +501,10 @@ hgroup {
 }
 
 hr {
-  margin-top: 52px;
-  margin-top: 3.25rem;
-  margin-bottom: 52px;
-  margin-bottom: 3.25rem;
+  margin-top: 26px;
+  margin-top: 1.625rem;
+  margin-bottom: 26px;
+  margin-bottom: 1.625rem;
   box-sizing: content-box;
   border: 0;
   color: #222;
@@ -520,10 +520,10 @@ hr {
 }
 @media screen and (min-width: 40em) {
   hr {
-    margin-top: 62px;
-    margin-top: 3.444444444444445rem;
-    margin-bottom: 62px;
-    margin-bottom: 3.444444444444445rem;
+    margin-top: 31px;
+    margin-top: 1.722222222222222rem;
+    margin-bottom: 31px;
+    margin-bottom: 1.722222222222222rem;
     height: 31px;
     height: 1.722222222222222rem;
   }

@@ -1,20 +1,20 @@
 nav#nav
   strong.brand.attention-grabber &ensp;*friendship&emsp;&emsp;
   a(href="#home")
-    i.fa.fa-star &ensp;Home&emsp;&emsp;
+    span.fa.fa-star &ensp;Home&emsp;&emsp;
   a(href="#about")
-    i.fa.fa-info-circle &ensp;about this game&emsp;&emsp;
+    span.fa.fa-info-circle &ensp;about this game&emsp;&emsp;
   a(href="#howto")
-    i.fa.fa-question-circle &ensp;how to play&emsp;&emsp;
+    span.fa.fa-question-circle &ensp;how to play&emsp;&emsp;
   a(href="#howto")
-    i.fa.fa-terminal &ensp;play!&emsp;&emsp;
-script.
-  var nav = document.getElementById('nav');
-  var navScrollY = nav.offsetTop - nav.clientHeight;
-  window.addEventListener('scroll', function(e) {
-    if (navScrollY - window.scrollY <= 0) {
-      nav.className = 'top';
-    } else {
-      nav.className = '';
-    }
-  });
+    span.fa.fa-terminal &ensp;play!&emsp;&emsp;
+  script.
+    var nav = document.getElementById('nav');
+    var navScrollY = nav.offsetTop - nav.clientHeight;
+    window.addEventListener('scroll', function(e) {
+      if (navScrollY - window.scrollY <= 0) {
+        nav.className = 'top';
+      } else {
+        nav.className = '';
+      }
+    });
