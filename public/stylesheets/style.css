@@ -32,7 +32,6 @@ footer {
   background-color: #fefefe;
 }
 input,
-textarea,
 select,
 button[type='submit'] {
   -webkit-box-sizing: border-box;
