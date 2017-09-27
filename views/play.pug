@@ -1,9 +1,13 @@
 extends layout.pug
 block content
   section#username
-    h3 Pick a cool name and impress your enemy&emsp;
-    br
-    form(id="uform" action="#" method="post")
-      input(type="text" id="uname" name="uname" onkeyup="this.setAttribute('value', this.value);" value="" required)
-      label(for="uname") Beware of me! My name is...
-      input(type="submit" value="Argh!")
+    article
+      h3 Connection
+      form(id="uform" action="#" method="post")
+        .former
+          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy..." required)
+        .former
+          input(type="submit" value="Argh!")
+        .former
+          p.alert
+            i — Sorry, this name is not available at the moment...
