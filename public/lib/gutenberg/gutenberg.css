@@ -691,6 +691,7 @@ sub {
 
 .alignCenter {
   text-align: center;
+  margin: 0 auto;
 }
 
 .alignRight {

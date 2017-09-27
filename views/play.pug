@@ -4,10 +4,15 @@ block content
     article
       h3 Connection
       form(id="uform" action="#" method="post")
+        figure
+          figcaption.alignLeft
+            | Automatic avatar thanks to 
+            a(href="http://avatars.adorable.io/") &ldquo;Adorable Avatars!&rdquo;
+          img(src="" width="129" height="129")#avatar
         .former
-          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy..." required)
+          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" required)
         .former
           input(type="submit" value="Argh!")
         .former
           p.alert
-            i — Sorry, this name is not available at the moment...
+            i — Sorry, this name is not available at the moment…

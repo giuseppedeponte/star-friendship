@@ -56,6 +56,9 @@ input:not([type='submit']):focus {
 .former {
   height: 5rem;
 }
+#uform #avatar {
+  border-radius: 10px;
+}
 #uform #uname {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
