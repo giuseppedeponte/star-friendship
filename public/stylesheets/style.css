@@ -45,6 +45,7 @@ button[type='submit'] {
   margin: inherit;
   padding: inherit;
   line-height: inherit;
+  box-shadow: none;
 }
 input:not([type='submit']) {
   height: 3.3rem;
@@ -54,10 +55,31 @@ input:not([type='submit']):focus {
   border-bottom: 5px solid tomato;
 }
 .former {
-  height: 5rem;
+  height: 4rem;
+  margin: 0.5rem auto;
 }
+.hide {
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
+}
+/* UFORM */
 #uform #avatar {
+}
+#uform #avatar img {
   border-radius: 10px;
+  border-radius: 10px;
+  outline: 1px solid #aaa;
+  outline-offset: 4px;
+  outline-style: dashed;
+  margin: 0.6rem auto;
+  font-size: x-small;
+  line-height: 2;
+  text-align: center;
+}
+#uform #avatar figcaption {
+  font-size: x-small;
 }
 #uform #uname {
   -webkit-box-sizing: border-box;
@@ -65,7 +87,10 @@ input:not([type='submit']):focus {
           box-sizing: border-box;
   width: 100%;
 }
-#uform input[type="submit"] {
+#uform input[type="submit"],
+#uform input[type="submit"]:active,
+#uform input[type="submit"]:active:focus,
+#uform input[type="submit"]:active:hover {
   display: inline-block;
   width: 50%;
   margin-left: 25%;
@@ -73,16 +98,22 @@ input:not([type='submit']):focus {
   color: #fefefe;
   border-radius: 20px;
 }
-#uform #uname:valid ~ input[type="submit"],
-#uform #uname:valid ~ input[type="submit"]:focus:active,
-#uform #uname:valid ~ input[type="submit"]:hover:active {
+#uform input[type="submit"]:focus,
+#uform input[type="submit"]:hover {
+  cursor: pointer;
   background-color: tomato;
+  transition: all .5s;
 }
-#uform #uname:valid ~ input[type="submit"]:focus,
-#uform #uname:valid ~ input[type="submit"]:hover {
-  background-color: rgba(255,99,71,0.75);
+#uform .alert {
+  padding: 0.5rem 2rem;
+  background-color: crimson;
+  color: #fefefe;
+  text-align: center;
+  margin-top: -0.7rem;
+  font-size: small;
+  line-height: 2.1;
+  border-radius: 0 0 27px 27px;
 }
-
 /* NAVIGATION */
 #nav {
   text-align: center;
