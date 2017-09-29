@@ -1,21 +1,21 @@
 extends layout.pug
 block content
-  section#username.grid
+  section#username
     article
       h3 
       span.fa.fa-plug 
       |  Connection
-      form(id="uform" action="/play" method="get")
+      form(id="uform" action="/play" method="post")
         .former
           input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1")
         .former.alert.hide
           span.fa.fa-exclamation-circle &emsp;
-          span.text Sorry, you must have a name to play (it does not have to be your REAL name, though)…
+          span.text Sorry, you must choose a name to play (it does not have to be your REAL name, though)…
         br
         figure#avatar.alignLeft
           img(src="" width="75" height="75" alt="Automatic Adorable Avatar")#avatarImg
           figcaption
             | (automatic avatar thanks to 
             a(href="http://avatars.adorable.io/") &ldquo;Adorable Avatars!&rdquo;)
-        .former
+        .former.loading
           input(type="submit" value="Argh!!!" tabindex="1")

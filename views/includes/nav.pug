@@ -8,13 +8,3 @@ nav#nav
     span.fa.fa-question-circle &ensp;how to play&emsp;&emsp;
   a(href="/play")
     span.fa.fa-terminal &ensp;play!&emsp;&emsp;
-  script.
-    var nav = document.getElementById('nav');
-    var navScrollY = nav.offsetTop - nav.clientHeight;
-    window.addEventListener('scroll', function(e) {
-      if (navScrollY - window.scrollY <= 0) {
-        nav.className = 'top';
-      } else {
-        nav.className = '';
-      }
-    });

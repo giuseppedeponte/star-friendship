@@ -2,6 +2,7 @@
 html {
   font-size: 20px;
   font-size: 125%;
+  height: 100vh;
 }
 body {
   width: 100%;
@@ -87,32 +88,60 @@ input:not([type='submit']):focus {
           box-sizing: border-box;
   width: 100%;
 }
+#uform input[type="submit"].disabled {
+  opacity: 0.25;
+}
 #uform input[type="submit"],
-#uform input[type="submit"]:active,
-#uform input[type="submit"]:active:focus,
-#uform input[type="submit"]:active:hover {
-  display: inline-block;
+#uform input[type="submit"]:not(.disabled):active,
+#uform input[type="submit"]:not(.disabled):active:focus,
+#uform input[type="submit"]:not(.disabled):active:hover {
+  display: block;
   width: 50%;
   margin-left: 25%;
   background-color: #222;
   color: #fefefe;
   border-radius: 20px;
 }
-#uform input[type="submit"]:focus,
-#uform input[type="submit"]:hover {
+#uform input[type="submit"]:not(.disabled):focus,
+#uform input[type="submit"]:not(.disabled):hover {
   cursor: pointer;
   background-color: tomato;
   transition: all .5s;
 }
+#uform .loading {
+  position: relative;
+}
+#uform .loading::before {
+  content: 'Argh!!!';
+  position: absolute;
+  margin-left: 25%;
+  padding-left: 50%;
+  height: 34px;
+  background-color: tomato;
+  animation: loading 8s linear;
+  border-radius: 20px;
+  text-align: center;
+}
+@keyframes loading {
+  0% {
+    padding-left: 20px;
+    background-color: tomato;
+  }
+  100% {
+    padding-left: 50%;
+    background-color: tomato;
+  }
+}
 #uform .alert {
   padding: 0.5rem 2rem;
-  background-color: crimson;
+  background-color: tomato;
   color: #fefefe;
   text-align: center;
   margin-top: -0.7rem;
   font-size: small;
   line-height: 2.1;
   border-radius: 0 0 27px 27px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2) inset;
 }
 /* NAVIGATION */
 #nav {
