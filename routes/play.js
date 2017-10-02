@@ -1,13 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('play', { title: '*friendship' });
+  if (req.session && req.session.user) {
+    res.render('play', { title: '*friendship', user : req.session.user });
+  } else {
+    res.render('connect', { title: '*friendship'});
+  }
 });
 router.post('/', function(req, res, next) {
-  console.log(req.body);
-  res.json(req.body);
+  if (req.body && req.body.uname) {
+    req.session.user = {
+      name: req.body.uname,
+      connected_at: Date.now()
+    };
+    res.render('play', { title: '*friendship', user : req.session.user });
+  }
 });
 
 module.exports = router;

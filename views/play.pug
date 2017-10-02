@@ -1,21 +1,23 @@
 extends layout.pug
 block content
-  section#username
+  section#game
     article
       h3 
-      span.fa.fa-plug 
-      |  Connection
-      form(id="uform" action="/play" method="post")
-        .former
-          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1")
-        .former.alert.hide
-          span.fa.fa-exclamation-circle &emsp;
-          span.text Sorry, you must choose a name to play (it does not have to be your REAL name, though)…
-        br
-        figure#avatar.alignLeft
-          img(src="" width="75" height="75" alt="Automatic Adorable Avatar")#avatarImg
-          figcaption
-            | (automatic avatar thanks to 
-            a(href="http://avatars.adorable.io/") &ldquo;Adorable Avatars!&rdquo;)
-        .former.loading
-          input(type="submit" value="Argh!!!" tabindex="1")
+      span.fa.fa-fw.fa-terminal 
+      |  Play !
+      #players
+        figure
+          figcaption= user.name
+          img(src="https://api.adorable.io/avatars/50/"+user.name.toLowerCase().split(' ').join('-'), width="50" height="50" alt="Automatic Adorable Avatar")
+          figcaption.score 0.00 s
+        p
+          i.fa.fa-2x.fa-exchange
+        figure
+          figcaption Superman
+          img(src="https://api.adorable.io/avatars/50/pl2" width="50" height="50" alt="Automatic Adorable Avatar")
+          figcaption.score 0.00 s
+      hr
+      #field
+        p#player1 We were friends and have become estranged.
+        p#sentence.attention-grabber We were friends and have become estranged.
+        p#player2 We were friends and have become estranged.

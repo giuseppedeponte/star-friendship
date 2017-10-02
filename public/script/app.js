@@ -8,7 +8,6 @@ $(function() {
   // NAV COLLAPSE
   var nav = document.getElementById('nav');
   var navScrollY = $('header').offset().top + $('header').height();
-  console.log(navScrollY);
   $(window).on('scroll', function(e) {
     if (navScrollY <= window.scrollY) {
       $(nav).addClass('top');
@@ -20,13 +19,13 @@ $(function() {
   var uvalidate = function(name) {
     if (name !== '') {
       $('#uform .alert').hide();
-      $('#avatarImg')
-        .attr('src', 'https://api.adorable.io/avatar/75/' + name.split(' ').join('-'));
+      $('.avatar img')
+        .attr('src', 'https://api.adorable.io/avatars/75/' + name.split(' ').join('-'));
       $('#uform input[type="submit"]').attr('disabled', false).removeClass('disabled');
       return true;
     } else {
       $('#uform .alert').show();
-      $('#avatarImg').attr('src', '');
+      $('.avatar img').attr('src', '');
       $('#uform input[type="submit"]').attr('disabled', true).addClass('disabled');
       return false;
     }
@@ -46,10 +45,8 @@ $(function() {
         connected_at: new Date(),
         name: name
       };
-      $('#uform input[type="submit"]').addClass('loading');
-      $.post('/play', user, function(data) {
-        console.table(data);
-      });
+      this.submit();
     }
   });
+  // GAME
 });

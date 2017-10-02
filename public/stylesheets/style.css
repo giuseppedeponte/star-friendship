@@ -66,9 +66,7 @@ input:not([type='submit']):focus {
   visibility: visible;
 }
 /* UFORM */
-#uform #avatar {
-}
-#uform #avatar img {
+#uform .avatar img {
   border-radius: 10px;
   border-radius: 10px;
   outline: 1px solid #aaa;
@@ -79,7 +77,7 @@ input:not([type='submit']):focus {
   line-height: 2;
   text-align: center;
 }
-#uform #avatar figcaption {
+#uform .avatar figcaption {
   font-size: x-small;
 }
 #uform #uname {
@@ -112,24 +110,31 @@ input:not([type='submit']):focus {
   position: relative;
 }
 #uform .loading::before {
-  content: 'Argh!!!';
+  /*content: 'Argh!!!';*/
+  content: ' ';
+  width: 50%;
   position: absolute;
   margin-left: 25%;
-  padding-left: 50%;
   height: 34px;
-  background-color: tomato;
-  animation: loading 8s linear;
+  background-color: #222;
+  color: #fefefe;
+  font-weight: bold;
+  animation: loading 2s linear infinite;
   border-radius: 20px;
   text-align: center;
 }
 @keyframes loading {
-  0% {
-    padding-left: 20px;
-    background-color: tomato;
+  0%, 100% {
+    content: '* * *';
   }
-  100% {
-    padding-left: 50%;
-    background-color: tomato;
+  20%, 80% {
+    content: '* *'
+  }
+  40%, 60% {
+    content: '*'
+  }
+  50% {
+    content: '';
   }
 }
 #uform .alert {
@@ -142,6 +147,52 @@ input:not([type='submit']):focus {
   line-height: 2.1;
   border-radius: 0 0 27px 27px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2) inset;
+}
+/* GAME */
+#players {
+  margin: .8125rem auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+#players .score {
+  font-weight: bold;
+}
+#players figure {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+/*#players figure:first-of-type {
+  flex-direction: column-reverse;
+}*/
+#players figure img {
+  border-radius: 10px;
+  outline: 1px solid #aaa;
+  outline-offset: 4px;
+  outline-style: dashed;
+}
+#players figure figcaption {
+  font-size: small;
+}
+#sentence {
+  text-align: center;
+  margin: .8125rem;
+}
+#player1 {
+  text-align: left;
+  font-size: small;
+  width: 100%;
+  padding-right: 33%;
+}
+#player2 {
+  text-align: right;
+  font-size: small;
+  width: 100%;
+  padding-left: 33%;
 }
 /* NAVIGATION */
 #nav {
