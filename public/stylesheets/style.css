@@ -158,6 +158,7 @@ input:not([type='submit']):focus {
 }
 #players .score {
   font-weight: bold;
+  font-style: normal;
 }
 #players figure {
   display: flex;
@@ -174,6 +175,10 @@ input:not([type='submit']):focus {
   outline: 1px solid #aaa;
   outline-offset: 4px;
   outline-style: dashed;
+  margin: 0.6rem auto;
+  font-size: xx-small;
+  line-height: 2;
+  text-align: center;
 }
 #players figure figcaption {
   font-size: small;

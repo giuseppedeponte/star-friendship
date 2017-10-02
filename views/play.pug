@@ -1,4 +1,7 @@
 extends layout.pug
+block head-amend
+  script(src="/socket.io/socket.io.js" charset="utf-8")
+  script(src="/script/play.js")
 block content
   section#game
     article
@@ -8,16 +11,20 @@ block content
       #players
         figure
           figcaption= user.name
-          img(src="https://api.adorable.io/avatars/50/"+user.name.toLowerCase().split(' ').join('-'), width="50" height="50" alt="Automatic Adorable Avatar")
+          img(src="https://api.adorable.io/avatars/50/" + user.name.toLowerCase().split(' ').join('-'), width="50" height="50" alt="Automatic Adorable Avatar")
           figcaption.score 0.00 s
         p
           i.fa.fa-2x.fa-exchange
         figure
-          figcaption Superman
-          img(src="https://api.adorable.io/avatars/50/pl2" width="50" height="50" alt="Automatic Adorable Avatar")
+          figcaption ...
+          img(src="" width="50" height="50" alt="Waiting for opponent")
           figcaption.score 0.00 s
       hr
       #field
-        p#player1 We were friends and have become estranged.
-        p#sentence.attention-grabber We were friends and have become estranged.
-        p#player2 We were friends and have become estranged.
+        p#player1  &emsp;
+        //- | We were friends and have become estranged.
+        p#sentence.attention-grabber 
+          i.fa.fa-cog.fa-spin.fa-2x.fa-fw
+          //- span We were friends and have become estranged.
+        p#player2  &emsp;
+        //- | We were friends and have become estranged.
