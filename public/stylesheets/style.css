@@ -215,6 +215,7 @@ input:not([type='submit']):focus {
 #nav .brand {
   display: none;
 }
+#nav.fixed,
 #nav.top {
   position: fixed;
   top: 0;
@@ -225,9 +226,12 @@ input:not([type='submit']):focus {
   margin: 0;
   height: 3.5rem;
 }
+#nav.fixed .brand,
 #nav.top .brand {
   display: inline-block;
 }
+#nav.fixed strong,
+#nav.fixed a,
 #nav.top strong,
 #nav.top a {
   height: 100%;
@@ -235,6 +239,8 @@ input:not([type='submit']):focus {
   text-align: center;
   padding: 0 0.47rem;
 }
+#nav.fixed a:hover,
+#nav.fixed a:focus,
 #nav.top a:hover,
 #nav.top a:focus {
   color: tomato;

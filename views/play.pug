@@ -9,22 +9,28 @@ block content
       span.fa.fa-fw.fa-terminal 
       |  Play !
       #players
-        figure
-          figcaption= user.name
-          img(src="https://api.adorable.io/avatars/50/" + user.name.toLowerCase().split(' ').join('-'), width="50" height="50" alt="Automatic Adorable Avatar")
-          figcaption.score 0.00 s
+        figure.me
+          figcaption.name= user.name
+          img(src="https://api.adorable.io/avatars/50/" + user.name.toLowerCase().split(' ').join('-'), width="50" height="50" alt="Automatic Adorable Avatar").avatar
+          figcaption
+            span.score
+            span  s
         p
           i.fa.fa-2x.fa-exchange
-        figure
-          figcaption ...
-          img(src="" width="50" height="50" alt="Waiting for opponent")
-          figcaption.score 0.00 s
+        figure.it
+          figcaption.name ...
+          img(src="" width="50" height="50" alt="Waiting for opponent").avatar
+          figcaption
+            span.score
+            span  s
       hr
       #field
-        p#player1  &emsp;
+        p.me  &emsp;
+          span.sentence
         //- | We were friends and have become estranged.
         p#sentence.attention-grabber 
           i.fa.fa-cog.fa-spin.fa-2x.fa-fw
           //- span We were friends and have become estranged.
-        p#player2  &emsp;
+        p.it  &emsp;
+          span.sentence
         //- | We were friends and have become estranged.

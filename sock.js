@@ -3,58 +3,38 @@ const io = require('socket.io')();
 let availableRooms = [];
 let games = {};
 
-io.on('connection', (socket) => {
-
-  // receive readableName
-  // check if someone is waiting
-    // YES => join the room
-    // NO => create a new room and wait
-
-
-  // receive readableName from client
+let createRoom = (socket) => {
+  let room = '' + Date.now();
+  availableRooms.push(room);
+  games[room] = {
+    id: room,
+    players: []
+  };
+  return room;
+};
+let joinRoom = (socket) => {
+  let room = availableRooms.shift() || createRoom(socket);
+  socket.emit('joinRoom', room);
+  games[room].players.push({
+    name: socket.readableName,
+    id: socket.id,
+    score: 0
+  });
+  socket.join(room);
+  if (games[room].players.length === 2) {
+    io.to(room).emit('roomFull', games[room]);
+  }
+  return room;
+};
+let connect = (socket) => {
   socket.on('handshake++', (data) => {
-    socket.readableName = data.name;
-    if (availableRooms.length === 0) {
-      let roomNo = '' + Date.now();
-      availableRooms.push(roomNo);
-      let game = {
-        room: roomNo,
-        p1: socket.id,
-        p1r: socket.readableName,
-        p2: null,
-        p2r: '',
-        playing: false
-      };
-      games[roomNo] = game;
-      socket.join(roomNo, () => {
-        socket.emit('checkin', game);
-      });
-    } else if (games[availableRooms[0]].p1r !== socket.readableName) {
-      let roomNo = availableRooms.shift();
-      games[roomNo].p2 = socket.id;
-      games[roomNo].p2r = socket.readableName;
-      socket.join(roomNo, () => {
-        io.to(games[roomNo].p1).emit('game-on', {
-          roomNo: roomNo,
-          p1: games[roomNo].p1,
-          p1r: games[roomNo].p1r,
-          p2: games[roomNo].p2,
-          p2r: games[roomNo].p2r
-        });
-        io.to(games[roomNo].p2).emit('game-on', {
-          roomNo: roomNo,
-          p2: games[roomNo].p1,
-          p2r: games[roomNo].p1r,
-          p1: games[roomNo].p2,
-          p1r: games[roomNo].p2r
-        });
-      });
-    }
+    socket.emit('handshake++', socket.id);
+    socket.readableName = data;
+    joinRoom(socket);
   });
-  // send ID to client
-  socket.emit('handshake++', {
-    id: socket.id
-  });
+};
+io.on('connection', (socket) => {
+  connect(socket);
 });
 
 module.exports = io;

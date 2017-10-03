@@ -1,27 +1,41 @@
-var GAME = {};
 $(function() {
+  $('#nav').addClass('fixed');
+  $('header').hide();
 
+  var GAME;
   var sock = io('http://192.168.107.156:3000');
-  GAME.ownName = $('#players figure:first-of-type figcaption').first().text();
+  var render = function(player, property) {
+    if (property) {
+      $('.' + player + ' .' + property).text(GAME[player][property]);
+    } else {
+      for (property in GAME[player]) {
+        $('.' + player + ' .' + property).text(GAME[player][property]);
+      }
+    }
+  };
+  var connect = function() {
+    var myId;
+    var whoAmI = $('#players .me .name').first().text();
+    sock.emit('handshake++', whoAmI);
+    sock.on('handshake++', function(data) {
+      myId = data;
+    });
+    sock.on('joinRoom', function(data) {
+      console.log('Joined room:', data);
+    });
+    sock.on('roomFull', function(data) {
+      console.log('roomFull', data);
+      GAME = Object.create(data);
+      GAME.me = GAME.players[0].id === myId ? GAME.players[0] : GAME.players[1];
+      GAME.it = GAME.players[0].id === myId ? GAME.players[1] : GAME.players[0];
+      $('#players .it .avatar').attr('src', 'https://api.adorable.io/avatars/50/' + GAME.it.name.toLowerCase().split(' ').join('-'));
+      render('it');
+    });
+    sock.on('disconnect', function() {
+      GAME = null;
+    });
+  };
 
-  sock.emit('handshake++', {
-    name: GAME.ownName
-  });
-
-  sock.on('handshake++', function(data) {
-    GAME.ownId = data.id;
-  });
-
-  sock.on('checkin', function(data) {
-    GAME.roomNo = data.roomNo;
-  });
-
-  sock.on('game-on', function(data) {
-    GAME.opponentId = data.p2;
-    GAME.opponentName = data.p2r;
-    let src = GAME.opponentName.toLowerCase().split(' ').join('-');
-    $('#players figure:last-of-type figcaption').first().html(GAME.opponentName);
-    $('#players figure:last-of-type img').attr('src', 'https://api.adorable.io/avatars/50/' + src);
-  });
+  connect();
 
 });
