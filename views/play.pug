@@ -8,6 +8,11 @@ block content
       h3 
       span.fa.fa-fw.fa-terminal 
       |  Play !
+      #dialog
+        p 
+        i.fa.fa-fw.fa-cog.fa-spin 
+        span &nbsp;
+        span.text  Waiting for another player...
       #players
         figure.me
           figcaption.name= user.name
@@ -17,9 +22,9 @@ block content
             span  s
         p
           i.fa.fa-2x.fa-exchange
-        figure.it
+        figure.nme
           figcaption.name ...
-          img(src="" width="50" height="50" alt="Waiting for opponent").avatar
+          img(src="" width="50" height="50" alt="No player").avatar
           figcaption
             span.score
             span  s
@@ -27,10 +32,10 @@ block content
       #field
         p.me  &emsp;
           span.sentence
-        //- | We were friends and have become estranged.
+          //- | We were friends and have become estranged.
         p#sentence.attention-grabber 
           i.fa.fa-cog.fa-spin.fa-2x.fa-fw
           //- span We were friends and have become estranged.
-        p.it  &emsp;
+        p.nme  &emsp;
           span.sentence
-        //- | We were friends and have become estranged.
+          //- | We were friends and have become estranged.

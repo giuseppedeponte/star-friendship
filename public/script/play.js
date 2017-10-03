@@ -3,36 +3,63 @@ $(function() {
   $('header').hide();
 
   var GAME;
+  var ME;
+  var NME;
+  var defNME = {
+    name: '...',
+    score: 0
+  };
   var sock = io('http://192.168.107.156:3000');
+  var dialog = function(message, fa) {
+    fa = fa || 'fa-cog fa-spin';
+    $('#dialog .fa').attr('class', 'fa fa-fw ' + fa);
+    $('#dialog .text').text(message);
+    $('#dialog').show();
+  };
   var render = function(player, property) {
     if (property) {
-      $('.' + player + ' .' + property).text(GAME[player][property]);
+      $('.' + player + ' .' + property).text(GAME.players[player][property]);
     } else {
-      for (property in GAME[player]) {
-        $('.' + player + ' .' + property).text(GAME[player][property]);
+      for (property in GAME.players[player]) {
+        $('.' + player + ' .' + property).text(GAME.players[player][property]);
       }
+      $('.' + player + ' .avatar').attr('src', 'https://api.adorable.io/avatars/50/' + GAME.players[player].name.toLowerCase().split(' ').join('-'));
     }
   };
   var connect = function() {
-    var myId;
     var whoAmI = $('#players .me .name').first().text();
     sock.emit('handshake++', whoAmI);
+
     sock.on('handshake++', function(data) {
-      myId = data;
+      ME = data;
+      $('.me').addClass(data);
     });
+
     sock.on('joinRoom', function(data) {
       console.log('Joined room:', data);
     });
+
     sock.on('roomFull', function(data) {
       console.log('roomFull', data);
       GAME = Object.create(data);
-      GAME.me = GAME.players[0].id === myId ? GAME.players[0] : GAME.players[1];
-      GAME.it = GAME.players[0].id === myId ? GAME.players[1] : GAME.players[0];
-      $('#players .it .avatar').attr('src', 'https://api.adorable.io/avatars/50/' + GAME.it.name.toLowerCase().split(' ').join('-'));
-      render('it');
+      dialog('Get ready to play...', 'fa-gamepad');
+      for (id in GAME.players) {
+        if (id !== ME) {
+          NME = id;
+          $('.nme').addClass(id);
+        }
+      }
+      render(ME);
+      render(NME);
     });
-    sock.on('disconnect', function() {
-      GAME = null;
+    sock.on('disco', function(game) {
+      dialog('The other player has left the room.\n\rReload the page to play again.', 'fa-exclamation-circle');
+      GAME.players[NME] = Object.create(defNME);
+      render(NME);
+      $('.' + NME + ' .avatar').attr('src', '');
+    });
+    window.addEventListener('beforeunload', function() {
+      sock.close();
     });
   };
 

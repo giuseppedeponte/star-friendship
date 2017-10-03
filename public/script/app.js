@@ -17,13 +17,14 @@ $(function() {
   });
   // USER FORM
   var uvalidate = function(name) {
+    $('#uform .alert').hide();
     if (name !== '') {
-      $('#uform .alert').hide();
       $('.avatar img')
         .attr('src', 'https://api.adorable.io/avatars/75/' + name.split(' ').join('-'));
       $('#uform input[type="submit"]').attr('disabled', false).removeClass('disabled');
       return true;
     } else {
+      $('#uform .alert .text').text('Sorry, you must choose a name to play (it does not have to be your REAL name, though)…');
       $('#uform .alert').show();
       $('.avatar img').attr('src', '');
       $('#uform input[type="submit"]').attr('disabled', true).addClass('disabled');
@@ -31,7 +32,6 @@ $(function() {
     }
   }
   $('#uname').val('');
-  $('#uform .alert').hide().removeClass('hide');
   $('#uform input[type="submit"]').attr('disabled', true);
   $('#uname').on('keyup', function() {
     var name = this.value.trim().toLowerCase();

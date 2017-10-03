@@ -8,9 +8,10 @@ block content
       form#uform(action="/play" method="post")
         .former
           input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1")
-        .former.alert.hide
-          span.fa.fa-exclamation-circle &emsp;
-          span.text Sorry, you must choose a name to play (it does not have to be your REAL name, though)…
+        if message
+          .former.alert
+            span.fa.fa-exclamation-circle &emsp;
+            span.text= message
         br
         .former
           input(type="submit" value="Argh!!!" tabindex="1")

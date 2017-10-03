@@ -149,6 +149,17 @@ input:not([type='submit']):focus {
   box-shadow: 0 5px 10px rgba(0,0,0,0.2) inset;
 }
 /* GAME */
+#dialog {
+  width: 100%;
+  background-color: tomato;
+  height: 1.75rem;
+  line-height: 1.75rem;
+  color: #fefefe;
+  font-size: small;
+  text-align: center;
+  margin-top: 1.7rem;
+  border-radius: 5px;
+}
 #players {
   margin: .8125rem auto;
   display: flex;
@@ -187,13 +198,13 @@ input:not([type='submit']):focus {
   text-align: center;
   margin: .8125rem;
 }
-#player1 {
+#field .me {
   text-align: left;
   font-size: small;
   width: 100%;
   padding-right: 33%;
 }
-#player2 {
+#field .nme {
   text-align: right;
   font-size: small;
   width: 100%;
