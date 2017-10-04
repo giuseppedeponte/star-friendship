@@ -41,10 +41,7 @@ $(function() {
     e.preventDefault();
     var name = $('#uname').val().trim().toLowerCase();
     if (uvalidate(name)) {
-      var user = {
-        connected_at: new Date(),
-        name: name
-      };
+      $('#uname').val(name);
       this.submit();
     }
   });

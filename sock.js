@@ -52,11 +52,11 @@ let connect = (socket) => {
     socket.readableName = data;
     clients[socket.id] = socket;
     let room = joinRoom(socket);
-    let index = global.players.push(socket.readableName);
+    let index = global.players.push(socket.readableName) - 1;
     console.log('Clients connected', Object.keys(clients).length);
-    console.log('Players', index);
     socket.on('disconnect', function() {
       global.players.splice(index, 1);
+      console.log(index, global.players);
       socket.to(room).emit('disco', socket.id);
       games[room].removePlayer(socket.id);
       cleanRoom(room);

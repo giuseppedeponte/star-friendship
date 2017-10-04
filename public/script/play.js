@@ -9,7 +9,7 @@ $(function() {
     name: '...',
     score: 0
   };
-  var sock = io('http://192.168.107.156:3000');
+  var sock = io(window.location.origin);
   var dialog = function(message, fa) {
     fa = fa || 'fa-cog fa-spin';
     $('#dialog .fa').attr('class', 'fa fa-fw ' + fa);
