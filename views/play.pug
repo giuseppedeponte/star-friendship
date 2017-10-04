@@ -4,15 +4,6 @@ block head-amend
   script(src="/script/play.js")
 block content
   section#game
-    article
-      h3 
-      span.fa.fa-fw.fa-terminal 
-      |  Play !
-      #dialog
-        p 
-        i.fa.fa-fw.fa-cog.fa-spin 
-        span &nbsp;
-        span.text  Waiting for another player...
       #players
         figure.me
           figcaption.name= user
@@ -28,14 +19,29 @@ block content
           figcaption
             span.score
             span  s
+      #dialog
+        p 
+        i.fa.fa-fw.fa-cog.fa-spin 
+        span &nbsp;
+        span.text  Waiting for another player...
       hr
       #field
-        p.me  &emsp;
+        p.me.float-left
+          span.name
+          span &emsp;
+          span.fa.fa-2x.fa-i-cursor
+          span &emsp;
+        p.me.float-left
           span.sentence
           //- | We were friends and have become estranged.
         p#sentence.attention-grabber 
           i.fa.fa-cog.fa-spin.fa-2x.fa-fw
           //- span We were friends and have become estranged.
-        p.nme  &emsp;
+        p.nme.float-right
+          span &emsp;
+          span.fa.fa-2x.fa-i-cursor
+          span &emsp;
+          span.name
+        p.nme.float-right
           span.sentence
           //- | We were friends and have become estranged.

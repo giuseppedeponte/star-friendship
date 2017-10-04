@@ -200,15 +200,25 @@ input:not([type='submit']):focus {
 }
 #field .me {
   text-align: left;
+  padding-right: 33%;
+}
+#field .me,
+#field .nme {
   font-size: small;
   width: 100%;
-  padding-right: 33%;
+  overflow: hidden;
+  word-break: break-word;
+}
+#field .me span,
+#field .nme span {
+  line-height: 3;
+  color: #999;
+  vertical-align: middle;
 }
 #field .nme {
   text-align: right;
-  font-size: small;
-  width: 100%;
   padding-left: 33%;
+  direction: rtl;
 }
 /* NAVIGATION */
 #nav {
@@ -236,6 +246,10 @@ input:not([type='submit']):focus {
   max-width: none;
   margin: 0;
   height: 3.5rem;
+}
+#nav.top + section,
+#nav.fixed + section {
+  margin-top: 3.5rem;
 }
 #nav.fixed .brand,
 #nav.top .brand {

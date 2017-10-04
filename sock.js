@@ -33,7 +33,10 @@ let stat = (callee) => {
   console.log(callee + ' - Games: ', Object.keys(games).length);
   console.log(callee + ' - Players: ', global.players);
 }
-
+let play = (socket, room) => {
+  console.log(socket.id)
+  io.to(room).emit('game-start', 'We were friends and have become estranged.');
+};
 let createRoom = () => {
   let room = '' + Date.now();
   availableRooms.push(room);
@@ -50,6 +53,9 @@ let joinRoom = (socket) => {
   games[room].addPlayer(socket);
   if (games[room].count === 2) {
     io.to(room).emit('roomFull', games[room]);
+    // setTimeout(function() {
+      play(socket, room);
+    // }, 10000);
   }
   return room;
 };
@@ -81,6 +87,9 @@ let connect = (socket) => {
       index = global.players.push(socket.readableName) - 1;
     }
     stat('join');
+    socket.on('letter', function(data) {
+      io.to(room).emit('letter', data);
+    });
     socket.on('disconnect', function() {
       global.players.splice(index, 1);
       socket.to(room).emit('disco', socket.id);

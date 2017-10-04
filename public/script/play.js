@@ -1,6 +1,6 @@
 $(function() {
   $('#nav').addClass('fixed');
-  $('header').hide();
+  $('header, h3').hide();
   var GAME;
   var ME;
   var NME;
@@ -14,6 +14,35 @@ $(function() {
     $('#dialog .fa').attr('class', 'fa fa-fw ' + fa);
     $('#dialog .text').text(message);
     $('#dialog').show();
+  };
+  var play = function(data) {
+    sock.on('letter', function(data) {
+      console.log('WS', data.p);
+      $('.' + data.p + ' .sentence').text($('.' + data.p + ' .sentence').text() + data.key);
+    });
+    $(window).on('keyup', function(e) {
+      // $('.' + ME + ' .sentence').text($('.' + ME + ' .sentence').text() + e.key.toLowerCase());
+      sock.emit('letter', {
+        key: e.key,
+        p: ME
+      });
+      console.log('Client', ME);
+    });
+    dialog('Get ready to play in 10 s', 'fa-gamepad');
+    $('#sentence .fa').attr('class', 'fa fa-hourglass fa-spin fa-2x fa-fw');
+    for (var i = 10; i > 0; i -= 1) {
+      (function(t) {
+        setTimeout(function() {
+          var mess = 'Get ready to play in ' + t + ' s';
+          dialog(mess, 'fa-gamepad');
+        }, (10 - t) * 1000);
+      })(i);
+    }
+    setTimeout(function() {
+      var mess = 'Start typing as soon as the sentence appears!';
+      dialog(mess, 'fa-gamepad');
+      $('#sentence').html(data);
+    }, 11000);
   };
   var render = function(player, property) {
     if (property) {
@@ -39,13 +68,6 @@ $(function() {
     sock.on('roomFull', function(data) {
       console.log('roomFull', data);
       GAME = Object.create(data);
-      dialog('Get ready to play in 10 s', 'fa-gamepad');
-      for (var i = 10; i > 0; i -= 1) {
-        setTimeout(function() {
-          var t = i;
-          dialog('Get ready to play in ' + t + ' s', 'fa-gamepad');
-        }, (10 - i) * 1000);
-      }
       for (id in GAME.players) {
         if (id !== ME) {
           NME = id;
@@ -54,6 +76,9 @@ $(function() {
       }
       render(ME);
       render(NME);
+    });
+    sock.on('game-start', function(data) {
+      play(data);
     });
     sock.on('disco', function(game) {
       dialog('The other player has left the room.\n\rReload the page to play again.', 'fa-exclamation-circle');
