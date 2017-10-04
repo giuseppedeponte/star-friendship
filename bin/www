@@ -89,5 +89,6 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+global.players = [];
 let socketIo = app.io;
 socketIo.listen(server);

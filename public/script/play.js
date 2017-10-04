@@ -1,7 +1,6 @@
 $(function() {
   $('#nav').addClass('fixed');
   $('header').hide();
-
   var GAME;
   var ME;
   var NME;
@@ -34,15 +33,19 @@ $(function() {
       ME = data;
       $('.me').addClass(data);
     });
-
     sock.on('joinRoom', function(data) {
       console.log('Joined room:', data);
     });
-
     sock.on('roomFull', function(data) {
       console.log('roomFull', data);
       GAME = Object.create(data);
-      dialog('Get ready to play...', 'fa-gamepad');
+      dialog('Get ready to play in 10 s', 'fa-gamepad');
+      for (var i = 10; i > 0; i -= 1) {
+        setTimeout(function() {
+          var t = i;
+          dialog('Get ready to play in ' + t + ' s', 'fa-gamepad');
+        }, (10 - i) * 1000);
+      }
       for (id in GAME.players) {
         if (id !== ME) {
           NME = id;
@@ -62,7 +65,5 @@ $(function() {
       sock.close();
     });
   };
-
   connect();
-
 });

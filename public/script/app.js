@@ -3,6 +3,9 @@ if (!String.prototype.trim) {
     return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
   };
 }
+var capitalize = (str) => {
+ return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
 
 $(function() {
   // NAV COLLAPSE
@@ -41,7 +44,7 @@ $(function() {
     e.preventDefault();
     var name = $('#uname').val().trim().toLowerCase();
     if (uvalidate(name)) {
-      $('#uname').val(name);
+      $('#uname').val(capitalize(name));
       this.submit();
     }
   });
