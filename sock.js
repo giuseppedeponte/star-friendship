@@ -68,12 +68,18 @@ let destroy = (socket) => {
 let connect = (socket) => {
   socket.on('handshake++', (data) => {
     stat('handshake');
-    socket.emit('handshake++', socket.id);
-    console.log('---' + data + '---');
-    socket.readableName = data;
-    clients[socket.id] = socket;
-    let room = joinRoom(socket);
-    let index = global.players.push(socket.readableName) - 1;
+    let room;
+    let index;
+    if (global.players.indexOf(data) >= 0) {
+      socket.emit('doppelganger!');
+      return;
+    } else {
+      socket.emit('handshake++', socket.id);
+      socket.readableName = data;
+      clients[socket.id] = socket;
+      room = joinRoom(socket);
+      index = global.players.push(socket.readableName) - 1;
+    }
     stat('join');
     socket.on('disconnect', function() {
       global.players.splice(index, 1);

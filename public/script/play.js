@@ -61,6 +61,11 @@ $(function() {
       render(NME);
       $('.' + NME + ' .avatar').attr('src', '');
     });
+    sock.on('doppelganger!', function() {
+      console.log('I am two');
+      sock.close();
+      location.replace(window.location);
+    });
     window.addEventListener('beforeunload', function() {
       sock.close();
     });
