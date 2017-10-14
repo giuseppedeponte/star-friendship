@@ -197,10 +197,7 @@ input:not([type='submit']):focus {
 #sentence {
   text-align: center;
   margin: .8125rem;
-}
-#field .me {
-  text-align: left;
-  padding-right: 33%;
+  min-height: 2rem;
 }
 #field .me,
 #field .nme {
@@ -209,16 +206,25 @@ input:not([type='submit']):focus {
   overflow: hidden;
   word-break: break-word;
 }
-#field .me span,
-#field .nme span {
-  line-height: 3;
+#field .me .sentence,
+#field .nme .sentence {
+  display: block;
   color: #999;
-  vertical-align: middle;
+  min-height: 2rem;
+}
+#field .id span {
+  color: #ddd;
+}
+#field .me {
+  padding-right: 33%;
 }
 #field .nme {
-  text-align: right;
   padding-left: 33%;
-  direction: rtl;
+  text-align: right;
+}
+#field .name {
+  font-size: 1.4rem;
+  text-transform: lowercase;
 }
 /* NAVIGATION */
 #nav {

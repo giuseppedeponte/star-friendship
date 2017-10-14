@@ -9,25 +9,25 @@ $(function() {
     score: 0
   };
   var sock = io(window.location.origin);
+  var sendLetter = function(e) {
+    sock.emit('letter', {
+      c: e.key,
+      p: ME
+    });
+  };
   var dialog = function(message, fa) {
     fa = fa || 'fa-cog fa-spin';
     $('#dialog .fa').attr('class', 'fa fa-fw ' + fa);
     $('#dialog .text').text(message);
     $('#dialog').show();
   };
+  var reset = function() {
+    $('#sentence .fa').attr('class', 'fa fa-cog fa-spin fa-2x fa-fw');
+    $('#sentence').html('—');
+    $('.me .sentence').text('');
+    $('.nme .sentence').text('');
+  };
   var play = function(data) {
-    sock.on('letter', function(data) {
-      console.log('WS', data.p);
-      $('.' + data.p + ' .sentence').text($('.' + data.p + ' .sentence').text() + data.key);
-    });
-    $(window).on('keyup', function(e) {
-      // $('.' + ME + ' .sentence').text($('.' + ME + ' .sentence').text() + e.key.toLowerCase());
-      sock.emit('letter', {
-        key: e.key,
-        p: ME
-      });
-      console.log('Client', ME);
-    });
     dialog('Get ready to play in 10 s', 'fa-gamepad');
     $('#sentence .fa').attr('class', 'fa fa-hourglass fa-spin fa-2x fa-fw');
     for (var i = 10; i > 0; i -= 1) {
@@ -42,7 +42,15 @@ $(function() {
       var mess = 'Start typing as soon as the sentence appears!';
       dialog(mess, 'fa-gamepad');
       $('#sentence').html(data);
+      $(window).on('keyup', sendLetter);
     }, 11000);
+    sock.on('letter', function(data) {
+      $('.' + data.p + ' .sentence').text(data.s);
+    });
+    sock.on('score', function(data) {
+      GAME.players[data.p].score = data.score / 1000;
+      render(data.p, 'score');
+    });
   };
   var render = function(player, property) {
     if (property) {
@@ -76,8 +84,10 @@ $(function() {
       }
       render(ME);
       render(NME);
+      sock.emit('playerReady', 'ready');
     });
-    sock.on('game-start', function(data) {
+    sock.on('newRound', function(data) {
+      reset();
       play(data);
     });
     sock.on('disco', function(game) {
