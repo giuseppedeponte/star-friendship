@@ -192,6 +192,21 @@ input:not([type='submit']):focus {
   justify-content: center;
   align-items: center;
   width: 40%;
+  transition: all .3s linear;
+}
+#players figure.winner {
+  border: 1px dashed #999;
+  background-color: beige;
+}
+#players figure.winner::after {
+  content: 'winner';
+  color: #222;
+  background: #fefefe;
+  padding: 0px 1rem;
+  position: relative;
+  top: 0.8rem;
+  margin-top: -1rem;
+  border: 1px dashed #444;
 }
 /*#players figure:first-of-type {
   flex-direction: column-reverse;

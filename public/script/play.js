@@ -121,6 +121,13 @@ $(function() {
         }, 3000);
       }, 500);
     });
+    sock.on('gameOver', function(data) {
+      console.log(data);
+      setTimeout(function() {
+        $('#players .' + data.winner).addClass('winner');
+        dialog('Game Over! Total Score: ' + data.totalScore / 1000 + ' s','fa-clock-o');
+      }, 2000);
+    });
     sock.on('disco', function(game) {
       playing = false;
       dialog('The other player has left.\n\rReload the page and reconnect to play.', 'fa-exclamation-circle', 'red');

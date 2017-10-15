@@ -177,8 +177,28 @@ module.exports.create = (function() {
           setTimeout(() => {
             game.transitionTo('init');
           }, 3000);
+        } else {
+          let score = {};
+          let bestScore;
+          score.peas = Object.keys(game.players).reduce((a, b) => {
+            a = game.players[a];
+            b = game.players[b];
+            return a.readableName + '#' + b.readableName;
+          });
+          score.totalScore = Object.keys(game.players).reduce((n, p) => {
+            p = game.players[p];
+            score[p.id] = p.score;
+            if (!bestScore || p.score < bestScore) {
+              score.winner = p.id;
+            } else if ( p.score === bestScore) {
+              score.winner = 'draw';
+            }
+            return n + p.score;
+          }, 0);
+          game.notifyRoom('gameOver', score);
+          // Save score to database
+
         }
-        // Save score if game is over
       },
       stop: function(from, to, game) {}
     },
