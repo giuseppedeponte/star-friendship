@@ -151,7 +151,7 @@ input:not([type='submit']):focus {
 /* GAME */
 #dialog {
   width: 100%;
-  background-color: tomato;
+  background-color: #222;
   height: 1.75rem;
   line-height: 1.75rem;
   color: #fefefe;
@@ -159,6 +159,21 @@ input:not([type='submit']):focus {
   text-align: center;
   margin-top: 1.7rem;
   border-radius: 5px;
+  transition: background-color .2s linear;
+}
+#dialog.red {
+  background-color: crimson;
+}
+#dialog.orange {
+  background-color: orange;
+  color: #222;
+}
+#dialog.yellow {
+  background-color: gold;
+  color: #222;
+}
+#dialog.green {
+  background-color: mediumseagreen;
 }
 #players {
   margin: .8125rem auto;
@@ -205,12 +220,14 @@ input:not([type='submit']):focus {
   width: 100%;
   overflow: hidden;
   word-break: break-word;
+  line-height: 1.8;
 }
 #field .me .sentence,
 #field .nme .sentence {
   display: block;
   color: #999;
   min-height: 2rem;
+  text-indent: 0.4rem;
 }
 #field .id span {
   color: #ddd;

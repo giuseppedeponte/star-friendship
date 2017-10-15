@@ -106,7 +106,6 @@ module.exports.create = (function() {
           console.log(data);
           this.updateQueue(game, this);
         });
-        // Transition to play
       },
       updateQueue: (game, state) => {
         state.playersQueue -= 1;
@@ -172,8 +171,13 @@ module.exports.create = (function() {
     end: {
       start: function(from, to, game) {
         // Notify room
-        // Update each player score
+        game.notifyRoom('roundEnd', {});
         // Start next round if there is one
+        if (game.config.sentences[game.currentRound]) {
+          setTimeout(() => {
+            game.transitionTo('init');
+          }, 3000);
+        }
         // Save score if game is over
       },
       stop: function(from, to, game) {}

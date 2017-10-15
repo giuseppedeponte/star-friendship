@@ -7,7 +7,7 @@ block content
       |  Connection
       form#uform(action="/play" method="post")
         .former
-          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1")
+          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1" autocomplete="off")
         if message
           .former.alert
             span.fa.fa-exclamation-circle &emsp;
