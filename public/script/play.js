@@ -11,8 +11,9 @@ $(function() {
   var sock = io(window.location.origin);
   var playing = false;
   var sendLetter = function(e) {
+    console.log(String.fromCharCode(e.keyCode).toLowerCase());
     sock.emit('letter', {
-      c: e.key,
+      c: String.fromCharCode(e.keyCode).toLowerCase(),
       p: ME
     });
   };
