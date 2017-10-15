@@ -189,6 +189,7 @@ module.exports.create = (function() {
             p = game.players[p];
             score[p.id] = p.score;
             if (!bestScore || p.score < bestScore) {
+              bestScore = p.score;
               score.winner = p.id;
             } else if ( p.score === bestScore) {
               score.winner = 'draw';
