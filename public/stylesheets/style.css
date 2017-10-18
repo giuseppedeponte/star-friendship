@@ -186,6 +186,11 @@ input:not([type='submit']):focus {
   font-weight: bold;
   font-style: normal;
 }
+#players figure,
+#players p, {
+  display: inline-block;
+  width: 20%;
+}
 #players figure {
   display: flex;
   flex-flow: column nowrap;
