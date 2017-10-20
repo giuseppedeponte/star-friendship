@@ -4,8 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var db_uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/star_friendship';
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/star_friendship', {
+mongoose.connect(db_uri, {
   useMongoClient: true
 });
 var db = mongoose.connection;
@@ -39,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/play', play);
 app.use('/users', users);
-app.use('/scores', scores);
+app.use('/hall-of-fame', scores);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
