@@ -65,6 +65,16 @@ input:not([type='submit']):focus {
 .show {
   visibility: visible;
 }
+.small {
+  font-size: small;
+  background-color: #222;
+  color: #fefefe;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+}
+.xsmall {
+  font-size: x-small
+}
 /* UFORM */
 #uform .avatar img {
   border-radius: 10px;

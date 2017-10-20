@@ -4,10 +4,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/star_friendship', {
+  useMongoClient: true
+});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function() {
+  console.log('Database connected!');
+});
 
 var index = require('./routes/index');
 var play = require('./routes/play');
 var users = require('./routes/users');
+var scores = require('./routes/scores');
 
 var app = express();
 
@@ -29,13 +39,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/play', play);
 app.use('/users', users);
+app.use('/scores', scores);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -49,5 +59,4 @@ app.use(function(err, req, res, next) {
 });
 
 app.io = require('./sock');
-
 module.exports = app;

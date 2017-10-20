@@ -1,0 +1,26 @@
+extends layout.pug
+block content
+  h2 Hall of Fame
+  h4 Best Friends
+  ol
+    each friend in friends
+      li 
+        span.fa.fa-fw.fa-star-half-o.fa-spin
+        span &ensp;#{friend.score / 1000} s
+        span &emsp;
+        span.attention-grabber #{friend.name} 
+        span &ensp;
+        span.xsmall  #{friend.date.toDateString()}
+  h4 Best Ships
+  ol
+    each ship in ships
+      li
+        span.fa.fa-fw.fa-star.fa-spin
+        span &ensp;#{ship.score / 1000} s
+        span &ensp;
+        span.small
+          span #{ship.name.split('#')[0]}&ensp;
+          span.fa.fa-i-cursor
+          span &ensp;#{ship.name.split('#')[1]}
+        span &ensp;
+        span.xsmall #{ship.date.toDateString()}

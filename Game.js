@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const Ship = require('./models/Ship');
+const Friend = require('./models/Friend');
 module.exports.create = (function() {
   let Game = function(id, io, config) {
     this.id = id;
@@ -198,7 +201,40 @@ module.exports.create = (function() {
           }, 0);
           game.notifyRoom('gameOver', score);
           // Save score to database
-
+          let date = new Date();
+          let ship = new Ship({
+            name: score.peas,
+            score: score.totalScore,
+            players: Object.keys(game.players).reduce((array, key) => {
+              array.push({
+                name: game.players[key].readableName,
+                score: game.players[key].score
+              });
+              return array;
+            }, []),
+            date: date
+          }).save(function(err, ship) {
+            console.log('Game saved.')
+            let playerCount = 2;
+            Object.keys(game.players).map((key) => {
+              let friend = new Friend({
+                name: game.players[key].readableName,
+                score: game.players[key].score,
+                game: score.peas,
+                date: date
+              }).save(function(err, friend) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  playerCount -= 1;
+                  console.log(friend);
+                  if (playerCount === 0) {
+                    console.log('All players saved.');
+                  }
+                }
+              });
+            });
+          });
         }
       },
       stop: function(from, to, game) {}
