@@ -10,5 +10,5 @@ const shipSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-});
+}, { bufferCommands: false });
 module.exports = mongoose.model('Ship', shipSchema);

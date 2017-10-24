@@ -7,5 +7,5 @@ const friendSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-});
+}, { bufferCommands: false });
 module.exports = mongoose.model('Friend', friendSchema);

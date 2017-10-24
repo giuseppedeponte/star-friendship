@@ -1,5 +1,5 @@
 #!/usr/bin/env node
- 
+
 /**
  * Module dependencies.
  */
@@ -20,48 +20,65 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
 /**
+ * Connect to DB
+ */
+var mongoose = require('mongoose');
+var db_uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/star_friendship';
+mongoose.connect(db_uri, {
+ useMongoClient: true,
+ autoReconnect: true,
+ autoIndex: false, // Don't build indexes
+ reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+ reconnectInterval: 500, // Reconnect every 500ms
+ poolSize: 10, // Maintain up to 10 socket connections
+ // If not connected, return errors immediately rather than waiting for reconnect
+ bufferMaxEntries: 0
+});
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function() {
+  console.log('Database connected!');
+});
+db.on('reconnect', function() {
+  console.log('db reconnected');
+});
+db.on('disconnected', function(){
+  console.log('db disconnected');
+  mongoose.connect(db_uri, {server: { auto_reconnect:true, socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }}, replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } }});
+});
+ /**
  * Listen on provided port, on all network interfaces.
  */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
+ server.listen(port);
+ server.on('error', onError);
+ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
-
   if (isNaN(port)) {
     // named pipe
     return val;
   }
-
   if (port >= 0) {
     // port number
     return port;
   }
-
   return false;
 }
-
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
-
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
@@ -76,11 +93,9 @@ function onError(error) {
       throw error;
   }
 }
-
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
@@ -88,7 +103,6 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
 global.players = [];
 let socketIo = app.io;
 socketIo.listen(server);
