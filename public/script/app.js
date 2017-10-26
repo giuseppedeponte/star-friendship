@@ -21,13 +21,17 @@ $(function() {
   // USER FORM
   var uvalidate = function(name) {
     $('#uform .alert').hide();
-    if (name !== '') {
+    if (name !== '' && name.length <= 40) {
       $('.avatar img')
         .attr('src', 'https://api.adorable.io/avatars/75/' + name.split(' ').join('-'));
       $('#uform input[type="submit"]').attr('disabled', false).removeClass('disabled');
       return true;
     } else {
-      $('#uform .alert .text').text('Sorry, you must choose a name to play (it does not have to be your REAL name, though)…');
+      if (name.length > 40) {
+        $('#uform .alert .text').text('Sorry, you must choose a name shorter than 40 characters…');
+      } else {
+        $('#uform .alert .text').text('Sorry, you must choose a name to play (it does not have to be your REAL name, though)…');
+      }
       $('#uform .alert').show();
       $('.avatar img').attr('src', '');
       $('#uform input[type="submit"]').attr('disabled', true).addClass('disabled');

@@ -7,11 +7,10 @@ block content
       |  Connection
       form#uform(action="/play" method="post")
         .former
-          input(type="text" id="uname" name="uname" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1" autocomplete="off")
-        if message
-          .former.alert
-            span.fa.fa-exclamation-circle &emsp;
-            span.text= message
+          input(type="text" id="uname" name="uname" minlength="1" maxlength="40" value="" placeholder="Pick a cool name and impress your enemy…" autofocus required tabindex="1" autocomplete="off")
+        div(class="former alert " + (message ? '' : 'hidden') )
+          span.fa.fa-exclamation-circle &emsp;
+          span.text= message
         br
         .former
           input(type="submit" value="Argh!!!" tabindex="1")
