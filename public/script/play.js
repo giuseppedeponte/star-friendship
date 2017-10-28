@@ -34,21 +34,21 @@ $(function() {
   var play = function(data) {
     if (!playing) { return; }
     var dialogClass = 'fa-cog fa-spin';
-    dialog('Get ready to type in 10 s', dialogClass);
+    dialog('Get ready to type in 5 s', dialogClass);
     $('#sentence').html('<i class="fa fa-hourglass fa-pulse fa-fw"></i>');
-    for (var i = 10; i > 0; i -= 1) {
+    for (var i = 5; i > 0; i -= 1) {
       (function(t) {
         setTimeout(function() {
           if (!playing) { return; }
             var mess = 'Get ready to type in ' + t + ' s';
-            if (t <= 3) {
+            if (t <= 1) {
               dialog(mess, dialogClass, 'yellow');
-            } else if (t <= 6) {
+            } else if (t <= 3) {
               dialog(mess, dialogClass, 'orange');
             } else {
               dialog(mess, dialogClass);
             }
-        }, (10 - t) * 1000);
+        }, (5 - t) * 1000);
       })(i);
     }
     setTimeout(function() {
@@ -57,7 +57,7 @@ $(function() {
       dialog(mess, 'fa-terminal', 'green');
       $('#sentence').html(data);
       $(window).on('keyup', sendLetter);
-    }, 11000);
+    }, 6000);
   };
 
   var render = function(player, property) {

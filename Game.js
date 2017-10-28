@@ -100,7 +100,8 @@ module.exports.create = (function() {
                                    .filter((char) => {
                                       return /[\w]|[\s]/.test(char);
                                     })
-                                    .join('');
+                                    .join('')
+                                    .replace('  ', ' ');
         if (game.currentSentence[0] === ' ') {
           game.currentSentence = game.currentSentence.substr(1);
         }

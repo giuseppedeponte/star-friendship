@@ -249,18 +249,21 @@ input:not([type='submit']):focus {
 }
 #field .me,
 #field .nme {
-  font-size: small;
   width: 100%;
   overflow: hidden;
   word-break: break-word;
   line-height: 1.8;
+}
+#field .nme {
+  font-size: small;
 }
 #field .me .sentence,
 #field .nme .sentence {
   display: block;
   color: #999;
   min-height: 2rem;
-  text-indent: 0.4rem;
+  text-indent: 1rem;
+  line-height: 1.4;
 }
 #field .id span {
   color: #ddd;
@@ -326,4 +329,9 @@ input:not([type='submit']):focus {
 #nav.top a:focus {
   color: tomato;
   border-bottom: 5px solid tomato;
+}
+.advice {
+  font-size: small;
+  line-height: 1.8;
+  padding: 0 2.7em;
 }
